@@ -24,7 +24,7 @@
             </ion-item>
             <ion-item>
                 <ion-label position="stacked" class="label-input-select">Material Kolam</ion-label>
-                <ion-select v-model:value="material" placeholder="Tanah">
+                <ion-select v-model="material" placeholder="Tanah">
                     <ion-select-option value="Tanah">Tanah</ion-select-option>
                     <ion-select-option value="Ubin">Ubin</ion-select-option>
                     <ion-select-option value="Kaca">Kaca</ion-select-option>
@@ -40,7 +40,7 @@
             </ion-item>
 
             <div class="ion-text-center btn-container">
-                <ion-button @click="regValue">Registrasi</ion-button>
+                <ion-button @click="save()">Registrasi</ion-button>
             </div>
         </ion-content>
     </ion-page>
@@ -49,49 +49,45 @@
 <script lang="ts">
 import {
     IonContent,
-    IonHeader,
     IonPage,
+    IonCol,
+    IonRow,
+    IonSelect,
+    IonSelectOption,
     IonInput,
-    IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { homeSharp } from "ionicons/icons";
-import { Storage } from '@ionic/storage';
 
 export default defineComponent({
     name: "RegisterPage",
     components: {
         IonContent,
-        IonHeader,
         IonPage,
+        IonCol,
+        IonRow,
+        IonSelect,
+        IonSelectOption,
         IonInput,
-        IonItem,
     },
     data() {
         return {
-            "home-sharp" : homeSharp,
-            nama: ``,
-            lokasi: ``,
-            material: 'Tanah',
-            bentuk: `Bundar`,
+            nama: '',
+            lokasi: '',
+            material: '',
+            bentuk: '',
             // pondReg: `kolam : ${nama} location : ${lokasi} material : ${material} bentuk: ${bentuk}` 
         };
     },
     methods: {
-        async regValue() {
-            console.log(this.nama)
-            console.log(this.lokasi)
-            console.log(this.material)
-            console.log(this.bentuk)
+        save() {
+            var kolam = { "nama": this.nama, "lokasi": this.lokasi, "material": this.material, "bentuk": this.bentuk }
+            console.log(kolam)
+            // const store = new Storage();
+            // store.create();
+            // store.set('Pond', pond);
 
-            let pond = {'nama' : this.nama, 'lokasi' : this.lokasi, 'material' : this.material, 'bentuk' : this.bentuk}
-            console.log(pond)
-            const store = new Storage();
-            store.create();
-            store.set('Pond', pond);
-
-            var pond_copy = await store.get('Pond');
-            console.log(pond_copy)
+            // var pond_copy = await store.get('Pond');
+            // console.log(pond_copy)
         }
         //alert(this.inputEAN);
     },
